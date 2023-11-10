@@ -1,0 +1,8 @@
+name = "backend"
+main = "src/index.js"
+compatibility_date = "2023-11-10"
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "database"
+database_id = "6b8ce97d-af02-45aa-a59f-7b73fd05fdd9"
