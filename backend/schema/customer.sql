@@ -1,13 +1,13 @@
-DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS CustomerLinker;
+DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS CustomerContact;
 DROP TABLE IF EXISTS CustomerAddresses;
 
 CREATE TABLE Customer (
   CustomerID INTEGER PRIMARY KEY,
   
-  isActive INTEGER NOT NULL,
   CustomerName VARCHAR(200) NOT NULL,
+  isActive INTEGER NOT NULL DEFAULT 1,
   CustomerEmployeeCount INTEGER NOT NULL
 );
 

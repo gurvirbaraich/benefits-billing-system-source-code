@@ -57,6 +57,10 @@ export default async function UpdateCustomer(request, { DB }) {
           jsonObject.contact.email,
           jsonObject.contact.ID
         ),
+
+        DB.prepare(
+          "UPDATE CustomerLinker SET CustomerAddressID = ? WHERE CustomerContactID = ?"
+        ).bind(jsonObject.link.AddressID, jsonObject.contact.ID),
       ]);
     }
 
