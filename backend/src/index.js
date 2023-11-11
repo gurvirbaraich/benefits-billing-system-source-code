@@ -4,6 +4,10 @@ import CreateCustomer from "../controllers/customers/CreateCustomer";
 import DeleteCustomer from "../controllers/customers/DeleteCustomer";
 import ListCustomer from "../controllers/customers/ListCustomers";
 import UpdateCustomer from "../controllers/customers/UpdateCustomer";
+import CreateService from "../controllers/services/CreateService";
+import DeleteService from "../controllers/services/DeleteService";
+import ListService from "../controllers/services/ListService";
+import UpdateService from "../controllers/services/UpdateService";
 
 export default {
   async fetch(request, env, ctx) {
@@ -18,6 +22,7 @@ export default {
         },
       },
 
+      // *Customer Routes*
       "/customer/create": {
         method: "POST",
         handler: CreateCustomer,
@@ -52,9 +57,39 @@ export default {
         method: "POST",
         handler: DeleteCustomer,
       },
+
+      // *Services Routes*
+      "/services/create": {
+        method: "POST",
+        handler: CreateService,
+      },
+
+      "/services/list": {
+        method: "GET",
+        handler: ListService,
+      },
+
+      "/services/delete": {
+        method: "POST",
+        handler: DeleteService,
+      },
+
+      "/services/update": {
+        method: "POST",
+        handler: UpdateService,
+      }
     };
 
-    return Response.json(await getComputedObject(paths)(request, env), {
+    // Getting the time when the serverless function was invoked.
+    const begin = Date.now();
+
+    // Calling the serverless function registered for the requested route.
+    const jsonResponse = await getComputedObject(paths)(request, env) ?? {};
+
+    // Setting the time taken by the serverless function
+    jsonResponse.processingTime = `${Date.now() - begin}ms`;
+
+    return Response.json(jsonResponse, {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "*",
       "Access-Control-Allow-Methods": "GET, POST",

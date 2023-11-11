@@ -7,8 +7,6 @@ export default async function CreateCustomer(request, { DB }) {
      ** 2) Link all the pieces together.
      */
 
-    const begin = Date.now();
-
     // Getting the JSON send from the client.
     const jsonObject = await request.json();
 
@@ -76,7 +74,6 @@ export default async function CreateCustomer(request, { DB }) {
 
     return {
       status: "OK!!",
-      processingTime: `${Date.now() - begin}ms`,
     };
   } catch (error) {
     // Sending back the error message.

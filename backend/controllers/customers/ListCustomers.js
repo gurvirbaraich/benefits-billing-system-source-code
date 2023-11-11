@@ -1,6 +1,5 @@
 export default async function ListCustomer(request, { DB }) {
   try {
-    const begin = Date.now();
     const output = await DB.prepare(
       `
         SELECT * FROM CustomerLinker
@@ -18,7 +17,6 @@ export default async function ListCustomer(request, { DB }) {
     return {
       status: "OK!!",
       customers: output.results,
-      processingTime: `${Date.now() - begin}ms`,
     };
   } catch (error) {
     // Throw an error.
